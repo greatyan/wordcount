@@ -1,0 +1,37 @@
+#Those rules are define in http://unicode.org/reports/tr29/#Word_Boundary_Rules
+#WB4 is changed by removing * to simplify the rule definition
+#Break at the start and end of text.
+WB1     sot     ÷   
+WB2         ÷   eot
+#Do not break within CRLF.
+WB3     CR  ×   LF
+#Otherwise break before and after Newlines (including CR and LF)
+WB3a    (Newline | CR | LF)     ÷    
+WB3b        ÷   (Newline | CR | LF)
+#Ignore Format and Extend characters, except when they appear at the beginning of a region of text.
+#(See Section 6.2, Replacing Ignore Rules.)
+WB4     X (Extend | Format)    →   X
+#Do not break between most letters.
+WB5     AHLetter    ×   AHLetter
+#Do not break letters across certain punctuation.
+WB6     AHLetter    ×   (MidLetter | MidNumLetQ) AHLetter
+WB7     AHLetter (MidLetter | MidNumLetQ)   ×   AHLetter
+WB7a    Hebrew_Letter   ×   Single_Quote
+WB7b    Hebrew_Letter   ×   Double_Quote Hebrew_Letter
+WB7c    Hebrew_Letter Double_Quote  ×   Hebrew_Letter
+#Do not break within sequences of digits, or digits adjacent to letters (“3a”, or “A3”).
+WB8     Numeric     ×   Numeric
+WB9     AHLetter    ×   Numeric
+WB10    Numeric     ×   AHLetter
+#Do not break within sequences, such as “3.2” or “3,456.789”.
+WB11    Numeric (MidNum | MidNumLetQ)   ×   Numeric
+WB12    Numeric     ×   (MidNum | MidNumLetQ) Numeric
+#Do not break between Katakana.
+WB13    Katakana    ×   Katakana
+#Do not break from extenders.
+WB13a   (AHLetter | Numeric | Katakana | ExtendNumLet)  ×   ExtendNumLet
+WB13b   ExtendNumLet    ×   (AHLetter | Numeric | Katakana)
+#Do not break between regional indicator symbols.
+WB13c   Regional_Indicator  ×   Regional_Indicator
+#Otherwise, break everywhere (including around ideographs).
+WB14    Any     ÷   Any
