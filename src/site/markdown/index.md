@@ -42,6 +42,38 @@ Try following URL in different languages:
 * [http://www.bbc.com/hindi/](http://www.bbc.com/hindi/)
 * [http://www.ynet.co.il/](http://www.ynet.co.il/)
 
+## Performance
+The total complexity of the algorithm is O(N). In detail:
+
+1. Word breaking: O(N), N is the character count.
+2. Word counting: O(N), N is the word count.
+3. Top word selection: O(LOG(N)), N is the selected word count.
+
+So the total complexity is O(N).
+
+### Performance Testing
+PerformanceTest.java can be used to test the word breaking performance. It evaluates the performance by count on dynamically generate random words. The select word number is fixed to 1000, the total word count doubles for each testing from 1024 to 4194304. The time used to run the test is around:
+
+	   WORDS	| TIME(MS)
+	---------------------
+	    1024	|    0
+	    2048	|    0
+	    4096	|    0
+	    8192	|   16
+	   16384	|   16
+	   32768	|   32
+	   65536	|   42
+	  131072	|   62
+	  262144	|  175
+	  524288	|  362
+	 1048576	| 1110
+	 2097152	| 2536
+	 4194304	| 4807
+
+Using following command to run the performance testing in you local machine (you may have different result).
+
+	java -cp wordcount.jar PerformanceTest
+
 ##Document
 
 All documents are generated in maven site, including:
