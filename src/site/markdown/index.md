@@ -72,7 +72,7 @@ PerformanceTest.java can be used to test the word breaking performance. It evalu
 
 Using following command to run the performance testing in you local machine (you may have different result).
 
-	java -cp wordcount.jar PerformanceTest
+	java -cp wordcount.jar wyan.PerformanceTest
 
 ##Document
 
